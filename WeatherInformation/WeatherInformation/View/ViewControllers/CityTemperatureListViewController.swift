@@ -145,9 +145,10 @@ extension CityTemperatureListViewController : CityTempFooterViewDelegate {
         cityTemperatureTable.reloadData()
     }
     
-    func addButtonTapped() {
-        
-    }
+        func addButtonTapped() {
+            let cityListViewController = UIStoryboard.init(name: Constants.storyboard, bundle: Bundle.main).instantiateViewController(withIdentifier: Constants.cityListViewController) as? CityListViewController
+            self.navigationController?.pushViewController(cityListViewController!, animated: true)
+        }
     
 }
 
