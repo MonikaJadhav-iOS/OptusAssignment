@@ -17,6 +17,8 @@
 		D81CEE1C258A320B00335533 /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D81CEE19258A320B00335533 /* CoreDataManager.swift */; };
 		D81CEE1F258A32C000335533 /* CityTemperatureTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D81CEE1D258A32C000335533 /* CityTemperatureTableViewCell.xib */; };
 		D81CEE20258A32C000335533 /* CityTemperatureTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D81CEE1E258A32C000335533 /* CityTemperatureTableViewCell.swift */; };
+		D81CEE23258A3C4100335533 /* CityTempFooterViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D81CEE21258A3C4100335533 /* CityTempFooterViewCell.swift */; };
+		D81CEE24258A3C4100335533 /* CityTempFooterViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D81CEE22258A3C4100335533 /* CityTempFooterViewCell.xib */; };
 		D8D144902589D4D800D97EC0 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D8D1448E2589D4D800D97EC0 /* Main.storyboard */; };
 		D8D144932589D4D900D97EC0 /* WeatherInformation.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = D8D144912589D4D900D97EC0 /* WeatherInformation.xcdatamodeld */; };
 		D8D144952589D4DE00D97EC0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D8D144942589D4DE00D97EC0 /* Assets.xcassets */; };
@@ -59,6 +61,8 @@
 		D81CEE19258A320B00335533 /* CoreDataManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
 		D81CEE1D258A32C000335533 /* CityTemperatureTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CityTemperatureTableViewCell.xib; sourceTree = "<group>"; };
 		D81CEE1E258A32C000335533 /* CityTemperatureTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CityTemperatureTableViewCell.swift; sourceTree = "<group>"; };
+		D81CEE21258A3C4100335533 /* CityTempFooterViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CityTempFooterViewCell.swift; sourceTree = "<group>"; };
+		D81CEE22258A3C4100335533 /* CityTempFooterViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CityTempFooterViewCell.xib; sourceTree = "<group>"; };
 		D8D144852589D4D800D97EC0 /* WeatherInformation.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WeatherInformation.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D8D1448F2589D4D800D97EC0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		D8D144922589D4D900D97EC0 /* WeatherInformation.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = WeatherInformation.xcdatamodel; sourceTree = "<group>"; };
@@ -241,6 +245,8 @@
 			children = (
 				D81CEE1E258A32C000335533 /* CityTemperatureTableViewCell.swift */,
 				D81CEE1D258A32C000335533 /* CityTemperatureTableViewCell.xib */,
+				D81CEE21258A3C4100335533 /* CityTempFooterViewCell.swift */,
+				D81CEE22258A3C4100335533 /* CityTempFooterViewCell.xib */,
 			);
 			path = TableViewCells;
 			sourceTree = "<group>";
@@ -362,6 +368,7 @@
 				D8D144952589D4DE00D97EC0 /* Assets.xcassets in Resources */,
 				D81CEE1F258A32C000335533 /* CityTemperatureTableViewCell.xib in Resources */,
 				D8D144902589D4D800D97EC0 /* Main.storyboard in Resources */,
+				D81CEE24258A3C4100335533 /* CityTempFooterViewCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -389,6 +396,7 @@
 				D81CEE11258A309700335533 /* Formatter.swift in Sources */,
 				D8D144CC2589E75A00D97EC0 /* ApiClient.swift in Sources */,
 				D81CEE1B258A320B00335533 /* City+CoreDataProperties.swift in Sources */,
+				D81CEE23258A3C4100335533 /* CityTempFooterViewCell.swift in Sources */,
 				D81CEE20258A32C000335533 /* CityTemperatureTableViewCell.swift in Sources */,
 				D81CEE1C258A320B00335533 /* CoreDataManager.swift in Sources */,
 				D81CEE1A258A320B00335533 /* City+CoreDataClass.swift in Sources */,

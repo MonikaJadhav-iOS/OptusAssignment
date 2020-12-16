@@ -88,6 +88,21 @@ extension CityTemperatureListViewController : UITableViewDelegate , UITableViewD
         return cell
     }
     
+    func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
+           
+           let footerView =  Bundle.main.loadNibNamed(Constants.cityTempFooterViewCell, owner: self, options: nil)?.first as! CityTempFooterViewCell
+           footerView.delegate = self
+           
+           if isCelciusSelected! {
+               footerView.celciusButton.setTitleColor(.white, for: .normal)
+               footerView.faraniteButton.setTitleColor(.lightGray, for: .normal)
+           }else {
+               footerView.celciusButton.setTitleColor(.lightGray, for: .normal)
+               footerView.faraniteButton.setTitleColor(.white, for: .normal)
+           }
+           return footerView
+       }
+    
     
     func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
         if cityTempViewModel.cityTempList.count == 1 {
@@ -113,9 +128,26 @@ extension CityTemperatureListViewController : UITableViewDelegate , UITableViewD
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 100
+        return UITableViewAutomaticDimension
     }
 }
 
-
+//MARK: - UITableView Footer delegate methods
+extension CityTemperatureListViewController : CityTempFooterViewDelegate {
+    
+    func degreeCelciusButtonTapped(sender: UIButton) {
+        isCelciusSelected = true
+        cityTemperatureTable.reloadData()
+    }
+    
+    func degreeFareniteButtonTapped(sender: UIButton) {
+        isCelciusSelected = false
+        cityTemperatureTable.reloadData()
+    }
+    
+    func addButtonTapped() {
+        
+    }
+    
+}
 
