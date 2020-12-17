@@ -103,6 +103,13 @@ extension CityTemperatureListViewController : UITableViewDelegate , UITableViewD
            return footerView
        }
     
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+           tableView.deselectRow(at: indexPath, animated: true)
+           let cityDetailViewController = UIStoryboard.init(name: Constants.storyboard, bundle: Bundle.main).instantiateViewController(withIdentifier: Constants.cityDetailViewController) as? CityDetailViewController
+           cityDetailViewController?.cityID = cityTempViewModel.getCityId(indexPath : indexPath)
+           cityDetailViewController?.isCelciusSelected = self.isCelciusSelected
+           self.navigationController?.pushViewController(cityDetailViewController!, animated: true)
+       }
     
     func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
         if cityTempViewModel.cityTempList.count == 1 {
