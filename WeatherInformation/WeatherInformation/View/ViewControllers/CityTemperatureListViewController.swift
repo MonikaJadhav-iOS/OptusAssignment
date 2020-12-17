@@ -25,18 +25,33 @@ class CityTemperatureListViewController: BaseViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
+        startTimer()
         isCelciusSelected = true
-        if cityTempViewModel.fetchAllCityTemperatureRecordsFromDB() {
-            self.cityTemperatureTable.reloadData()
-        }else {
+//        if cityTempViewModel.fetchAllCityTemperatureRecordsFromDB() {
+//            self.cityTemperatureTable.reloadData()
+//        }else {
             getCityTemperatureListFromURL()
-        }
+        //}
     }
     
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
+        stopTimer()
     }
     
+    //MARK: - Timer for fetching data from server after perticular time
+    func stopTimer() {
+        if timer != nil {
+            timer?.invalidate()
+            timer = nil
+        }
+    }
+    func startTimer() {
+        timer =  Timer.scheduledTimer(withTimeInterval: 500.0, repeats: true) { (timer) in
+            self.getCityTemperatureListFromURL()
+        }
+
+    }
    
     
     //MARK: - Method for UI setup
@@ -51,13 +66,16 @@ class CityTemperatureListViewController: BaseViewController {
     
     //MARK: - Call to get all data server
     @objc func getCityTemperatureListFromURL() {
+        loadingView.isHidden = false
         cityTempViewModel.fetchCityTemperatureData { result in
             switch(result) {
             case .success:
+                self.loadingView.isHidden = true
                 if self.cityTempViewModel.fetchAllCityTemperatureRecordsFromDB() {
                     self.cityTemperatureTable.reloadData()
                 }
             case .failure(let error):
+                self.loadingView.isHidden = true
                 self.showAlert(message: error.localizedDescription, title: Constants.errorTitle, action: UIAlertAction(title: Constants.ok, style: .default, handler: nil))
             }
         }

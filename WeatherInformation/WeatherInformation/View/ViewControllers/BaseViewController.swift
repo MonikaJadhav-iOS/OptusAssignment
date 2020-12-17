@@ -12,7 +12,7 @@ class BaseViewController: UIViewController {
     
     //MARK: - Outlets and Variables
     var activityIndicator = UIActivityIndicatorView()
-   // var loadingView: LoadingView! = nil
+    var loadingView: LoadingView! = nil
     
     //MARK: - View Lifecycle Methods
     override func viewDidLoad() {
@@ -21,8 +21,8 @@ class BaseViewController: UIViewController {
     }
     
     func setUpLodingView() {
-//        let aux = attachAuxilliaryViews()
-//        loadingView = aux.self
+        let aux = attachAuxilliaryViews()
+        loadingView = aux.self
     }
     
     //MARK: - Add tap Gesture to View
@@ -68,5 +68,23 @@ class BaseViewController: UIViewController {
     
     @objc func dismissKeyboard() {
         view.endEditing(true)
+    }
+}
+
+// AuxilliaryViewAttachment
+extension UIViewController {
+    
+    /// Create, attach, layout and auxillary views, LoadingView
+    public func attachAuxilliaryViews() -> (LoadingView) {
+        guard let nc = navigationController else {
+            fatalError("UIViewController must belong to a UINavigationController")
+        }
+        let margins = nc.view.layoutMarginsGuide
+        let lv = LoadingView.create()
+        nc.view.addSubview(lv)
+        nc.view.bringSubview(toFront: lv)
+        LayoutHelper.fillAndCentre(lv, margins: margins)
+        lv.isHidden = true
+        return  lv
     }
 }
