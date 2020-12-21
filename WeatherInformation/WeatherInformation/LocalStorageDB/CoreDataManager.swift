@@ -45,15 +45,12 @@ class CoreDataManager {
     //MARK: - Methods for performing operations on database
     func insertCity(name: String, id : Int , temperature : Double , currentTime : Int , timezone : Int)  {
         
-        if !checkRecordForSelectedIdIsExists(id: id)  {
+       // if !checkRecordForSelectedIdIsExists(id: id)  {
             
             let managedContext = CoreDataManager.sharedManager.persistentContainer.viewContext
             
             let entity = NSEntityDescription.entity(forEntityName: "City",
                                                     in: managedContext)!
-            
-            let newCity = NSManagedObject(entity: entity,
-                                          insertInto: managedContext)
             
             let fetchRequest = NSFetchRequest<NSFetchRequestResult>()
             
@@ -61,18 +58,35 @@ class CoreDataManager {
             fetchRequest.entity = entity
             fetchRequest.predicate = predicate
             
-            newCity.setValue(name, forKey: "name")
-            newCity.setValue(id, forKey: "id")
-            newCity.setValue(temperature, forKey: "temperature")
-            newCity.setValue(currentTime, forKey: "currentTime")
-            newCity.setValue(timezone, forKey: "timeZone")
+            do {
+                let result = try managedContext.fetch(fetchRequest)
+                if (result.count > 0) {
+                    let updatedCity = (result[0] as! NSManagedObject) as! City
+                    updatedCity.setValue(name, forKey: "name")
+                    updatedCity.setValue(temperature, forKey: "temperature")
+                    updatedCity.setValue(currentTime, forKey: "currentTime")
+                    updatedCity.setValue(timezone, forKey: "timeZone")
+                }else {
+                    let newCity = NSManagedObject(entity: entity,insertInto: managedContext)
+                    newCity.setValue(name, forKey: "name")
+                    newCity.setValue(id, forKey: "id")
+                    newCity.setValue(temperature, forKey: "temperature")
+                    newCity.setValue(currentTime, forKey: "currentTime")
+                    newCity.setValue(timezone, forKey: "timeZone")
+                }
+            }catch {
+                let fetchError = error as NSError
+                print(fetchError)
+            }
+            
+            
             
             do {
                 try managedContext.save()
             } catch let error as NSError {
                 print("Could not save. \(error), \(error.userInfo)")
             }
-        }
+        //}
     }
     
     func checkRecordForSelectedIdIsExists(id : Int) -> Bool {
