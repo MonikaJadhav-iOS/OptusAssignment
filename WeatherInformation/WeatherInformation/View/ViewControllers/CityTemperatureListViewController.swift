@@ -61,6 +61,17 @@ class CityTemperatureListViewController: BaseViewController {
         self.setUpLodingView()
         self.cityTemperatureTable.isAccessibilityElement = true
         self.cityTemperatureTable.accessibilityIdentifier = Constants.temperatureListTableIdentifire
+        
+        let refreshControl = UIRefreshControl()
+        refreshControl.addTarget(self, action: #selector(pullToRefresh), for: .valueChanged)
+        self.cityTemperatureTable.refreshControl = refreshControl
+    }
+    
+    //MARK: - Pull to refresh method
+    @objc func pullToRefresh(refreshControl: UIRefreshControl) {
+     // self.cityTemperatureTable.reloadData()
+      getCityTemperatureListFromURL()
+      refreshControl.endRefreshing()
     }
     
     
