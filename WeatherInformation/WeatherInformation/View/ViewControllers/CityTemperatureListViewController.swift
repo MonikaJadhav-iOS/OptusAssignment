@@ -27,11 +27,7 @@ class CityTemperatureListViewController: BaseViewController {
         super.viewWillAppear(true)
         startTimer()
         isCelciusSelected = true
-//        if cityTempViewModel.fetchAllCityTemperatureRecordsFromDB() {
-//            self.cityTemperatureTable.reloadData()
-//        }else {
-            getCityTemperatureListFromURL()
-        //}
+        getCityTemperatureListFromURL()
     }
     
     override func viewDidDisappear(_ animated: Bool) {
@@ -50,9 +46,9 @@ class CityTemperatureListViewController: BaseViewController {
         timer =  Timer.scheduledTimer(withTimeInterval: 500.0, repeats: true) { (timer) in
             self.getCityTemperatureListFromURL()
         }
-
+        
     }
-   
+    
     
     //MARK: - Method for UI setup
     func setUpUI() {
@@ -69,9 +65,8 @@ class CityTemperatureListViewController: BaseViewController {
     
     //MARK: - Pull to refresh method
     @objc func pullToRefresh(refreshControl: UIRefreshControl) {
-     // self.cityTemperatureTable.reloadData()
-      getCityTemperatureListFromURL()
-      refreshControl.endRefreshing()
+        getCityTemperatureListFromURL()
+        refreshControl.endRefreshing()
     }
     
     
@@ -118,27 +113,27 @@ extension CityTemperatureListViewController : UITableViewDelegate , UITableViewD
     }
     
     func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
-           
-           let footerView =  Bundle.main.loadNibNamed(Constants.cityTempFooterViewCell, owner: self, options: nil)?.first as! CityTempFooterViewCell
-           footerView.delegate = self
-           
-           if isCelciusSelected! {
-               footerView.celciusButton.setTitleColor(.white, for: .normal)
-               footerView.faraniteButton.setTitleColor(.lightGray, for: .normal)
-           }else {
-               footerView.celciusButton.setTitleColor(.lightGray, for: .normal)
-               footerView.faraniteButton.setTitleColor(.white, for: .normal)
-           }
-           return footerView
-       }
+        
+        let footerView =  Bundle.main.loadNibNamed(Constants.cityTempFooterViewCell, owner: self, options: nil)?.first as! CityTempFooterViewCell
+        footerView.delegate = self
+        
+        if isCelciusSelected! {
+            footerView.celciusButton.setTitleColor(.white, for: .normal)
+            footerView.faraniteButton.setTitleColor(.lightGray, for: .normal)
+        }else {
+            footerView.celciusButton.setTitleColor(.lightGray, for: .normal)
+            footerView.faraniteButton.setTitleColor(.white, for: .normal)
+        }
+        return footerView
+    }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-           tableView.deselectRow(at: indexPath, animated: true)
-           let cityDetailViewController = UIStoryboard.init(name: Constants.storyboard, bundle: Bundle.main).instantiateViewController(withIdentifier: Constants.cityDetailViewController) as? CityDetailViewController
-           cityDetailViewController?.cityID = cityTempViewModel.getCityId(indexPath : indexPath)
-           cityDetailViewController?.isCelciusSelected = self.isCelciusSelected
-           self.navigationController?.pushViewController(cityDetailViewController!, animated: true)
-       }
+        tableView.deselectRow(at: indexPath, animated: true)
+        let cityDetailViewController = UIStoryboard.init(name: Constants.storyboard, bundle: Bundle.main).instantiateViewController(withIdentifier: Constants.cityDetailViewController) as? CityDetailViewController
+        cityDetailViewController?.cityID = cityTempViewModel.getCityId(indexPath : indexPath)
+        cityDetailViewController?.isCelciusSelected = self.isCelciusSelected
+        self.navigationController?.pushViewController(cityDetailViewController!, animated: true)
+    }
     
     func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
         if cityTempViewModel.cityTempList.count == 1 {
@@ -157,7 +152,7 @@ extension CityTemperatureListViewController : UITableViewDelegate , UITableViewD
         
     }
     
-   
+    
     
     func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
         return 50
@@ -181,10 +176,10 @@ extension CityTemperatureListViewController : CityTempFooterViewDelegate {
         cityTemperatureTable.reloadData()
     }
     
-        func addButtonTapped() {
-            let cityListViewController = UIStoryboard.init(name: Constants.storyboard, bundle: Bundle.main).instantiateViewController(withIdentifier: Constants.cityListViewController) as? CityListViewController
-            self.navigationController?.pushViewController(cityListViewController!, animated: true)
-        }
+    func addButtonTapped() {
+        let cityListViewController = UIStoryboard.init(name: Constants.storyboard, bundle: Bundle.main).instantiateViewController(withIdentifier: Constants.cityListViewController) as? CityListViewController
+        self.navigationController?.pushViewController(cityListViewController!, animated: true)
+    }
     
 }
 

@@ -47,7 +47,7 @@ class CityDetailViewController: BaseViewController {
     
     //MARK: - Call to get all data server
     func getCityWeatherDetails() {
-       // self.loadingView.isHidden = false
+        // self.loadingView.isHidden = false
         cityDetailViewModel.fetchCityDetailWeatherInformation(cityId:cityID) { result in
             switch(result) {
             case .success:

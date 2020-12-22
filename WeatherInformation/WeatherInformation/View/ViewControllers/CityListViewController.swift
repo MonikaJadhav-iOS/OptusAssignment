@@ -45,16 +45,16 @@ class CityListViewController: BaseViewController {
     
     //MARK: - Fetch all cities list from local file
     func getAllCitiesList() {
-       // loadingView.isHidden = false
+        // loadingView.isHidden = false
         self.showActivityIndicator()
         cityAddViewModel.getAllCityDataFromLocalFile{ result in
             switch(result) {
             case .success:
                 self.hideActivityIndicator()
-               // self.loadingView.isHidden = true
+                // self.loadingView.isHidden = true
                 self.cityListTable.reloadData()
             case .failure(let error):
-               // self.loadingView.isHidden = true
+                // self.loadingView.isHidden = true
                 self.showAlert(message: error.localizedDescription, title: Constants.errorTitle, action: UIAlertAction(title: Constants.ok, style: .default, handler: nil))
             }
         }
@@ -83,16 +83,16 @@ extension CityListViewController : UITableViewDelegate , UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-       // self.loadingView.isHidden = false
+        // self.loadingView.isHidden = false
         tableView.deselectRow(at: indexPath, animated: true)
         let cityID = cityAddViewModel.getCityId(indexPath: indexPath)
         cityAddViewModel.fetchCityDetailWeatherForPerticularCity(cityId: cityID) { result in
             switch(result) {
             case .success:
-               // self.loadingView.isHidden = true
+                // self.loadingView.isHidden = true
                 self.navigationController?.popViewController(animated: true)
             case .failure(let error):
-               // self.loadingView.isHidden = true
+                // self.loadingView.isHidden = true
                 self.showAlert(message: error.localizedDescription, title: Constants.errorTitle, action: UIAlertAction(title: Constants.ok, style: .default, handler: nil))
             }
         }
